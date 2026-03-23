@@ -2,11 +2,12 @@ const express = require("express");
 const axios = require("axios");
 const cheerio = require("cheerio");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
-const path = require("path");
 
 app.use(express.static(path.join(__dirname)));
 
