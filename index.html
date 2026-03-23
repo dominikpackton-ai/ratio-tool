@@ -26,7 +26,7 @@
 async function check() {
     let urls = document.getElementById("urls").value.split("\n").filter(u => u);
 
-    let res = await fetch("http://localhost:3000/check", {
+    let res = await fetch("/check", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({ urls })
