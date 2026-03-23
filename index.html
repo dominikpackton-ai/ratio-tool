@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Code to Text Ratio</title>
+</head>
+
+<body style="font-family:Arial; text-align:center;">
+
+<h2>Code to Text Ratio</h2>
+
+<textarea id="urls" style="width:80%;height:120px;"></textarea><br><br>
+
+<button onclick="check()">Check Ratio</button>
+
+<table border="1" width="80%" style="margin:20px auto;">
+<tr>
+<th>URL</th>
+<th>Code</th>
+<th>Text</th>
+<th>Ratio</th>
+</tr>
+<tbody id="result"></tbody>
+</table>
+
+<script>
+async function check() {
+    let urls = document.getElementById("urls").value.split("\n").filter(u => u);
+
+    let res = await fetch("http://localhost:3000/check", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ urls })
+    });
+
+    let data = await res.json();
+
+    let output = document.getElementById("result");
+    output.innerHTML = "";
+
+    data.forEach(r => {
+        output.innerHTML += `
+        <tr>
+            <td>${r.url}</td>
+            <td>${r.code}</td>
+            <td>${r.text}</td>
+            <td>${r.ratio}</td>
+        </tr>`;
+    });
+}
+</script>
+
+</body>
+</html>
