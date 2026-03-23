@@ -9,14 +9,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ Serve frontend
+// ✅ IMPORTANT (fix for Cannot GET /)
 app.use(express.static(__dirname));
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// ✅ API
+// ✅ API route
 app.post("/check", async (req, res) => {
     const urls = req.body.urls;
     let results = [];
